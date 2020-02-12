@@ -1,0 +1,15 @@
+dir = getDirectory("path");
+dir = File.directory;
+name = File.nameWithoutExtension;
+setBatchMode(true);
+makeRectangle(0, 12, 728, 652);
+run("Crop");
+run("Auto Local Threshold", "method=Sauvola radius=15 parameter_1=0 parameter_2=0");
+run("Find Maxima...", "prominence=10 output=[Point Selection]");
+run("Set Measurements...", "center redirect=None decimal=3");
+run("Set Measurements...", "  redirect=None decimal=3");
+run("Measure");
+saveAs("Results", dir + name + ".csv");
+run("Analyze Particles...", "size=0-200 show=Outlines display clear include summarize add");
+saveAs("Results", "C:/Users/jose-/Documents/MATLAB/DropSizeTrain/batch/result-Area.png");
+setBatchMode(false);
